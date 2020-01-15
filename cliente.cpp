@@ -187,7 +187,6 @@ void *mov_1(void *apg){
 }
 void *mov_2(void *apg){
     while (fin<3){
-        (c == 'w')
         char c = getch2();
         if (c == 'w' ||c == 'W' && b.RY()>2){
             b.mover(-1);
