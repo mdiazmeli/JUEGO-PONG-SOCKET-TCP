@@ -9,6 +9,9 @@
 #include <string.h> 
 #include <stdlib.h>
 #include "iostream"
+
+
+
 #include <fcntl.h>
 #include <termios.h>
 #include <string.h>
@@ -16,7 +19,7 @@
 
 using namespace std;
 
-#define PORT 7777
+#define PORT 7777 
 
 int sockServ,fin = 0; 
 
@@ -171,12 +174,12 @@ void logo()
 void *mov_1(void *apg){
     while (fin<3){
         char c = getch2();
-        if (c == 'w' || c == 'W' && a.RY()>2){
+        if (c == 'w' && a.RY()>2){
             a.mover(-1);
         }
-        else if(c == 's' ||c == 'S' && a.RY()<18){
+        else if(c == 's' && a.RY()<18){
             a.mover(1);
-        }
+        }   
         string s = to_string(a.RY());
         char mensaje[2];
         strcpy(mensaje,s.c_str());
@@ -187,13 +190,15 @@ void *mov_1(void *apg){
 }
 void *mov_2(void *apg){
     while (fin<3){
+        
         char c = getch2();
-        if (c == 'w' ||c == 'W' && b.RY()>2){
+        if (c == 'w' && b.RY()>2){
             b.mover(-1);
         }
-        else if(c == 's' ||c == 'S' && b.RY()<18){
+        else if(c == 's' && b.RY()<18){
             b.mover(1);
         }
+
         string s = to_string(b.RY());
         char mensaje[2];
         strcpy(mensaje,s.c_str());
@@ -306,7 +311,6 @@ int main(int argc, char const *argv[])
         fprintf(stderr, "Error creating thread\n");
         }
     }
-
     PELOTA p(39,11,1,1);
     campo();
 
@@ -331,3 +335,5 @@ int main(int argc, char const *argv[])
     usleep(100000);
     return 0; 
 } 
+
+
