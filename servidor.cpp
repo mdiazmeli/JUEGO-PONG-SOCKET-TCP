@@ -17,21 +17,21 @@
 
 using namespace std;
 
-int p1 = 9;
-int p2 = 9;
+int p1y = 9;
+int p2y = 9;
 int jugadores[2];
 
 void gotoxy(int x,int y)
 {
     printf("%c[%d;%df",0x1B,y,x);
 }
-void *movi_1(void *apg)
+void *movi_1(void *arg)
 {
     char buffer[256];
     while (true){    
         recv(jugadores[0], buffer, sizeof(buffer), 0);
-        p1 = atoi(buffer);
-        usleep(5000);
+        p1y = atoi(buffer);
+        usleep(50000);
     }
 }
 void *movi_2(void *apg)
@@ -39,15 +39,15 @@ void *movi_2(void *apg)
     char buffer[256];
     while (true){    
         recv(jugadores[1], buffer, sizeof(buffer), 0);
-        p2 = atoi(buffer);
-        usleep(5000);
+        p2y = atoi(buffer);
+        usleep(50000);
     }
 }
 
 void *write_1(void *apg)
 {
        while (true){
-            string s = to_string(p2);
+            string s = to_string(p2y);
             char mensaje[2];
             strcpy(mensaje,s.c_str());
             write(jugadores[0], mensaje, sizeof(mensaje));
@@ -116,7 +116,6 @@ int main(int argc, char const *argv[])
         exit(EXIT_FAILURE); 
     } 
 
-
     socket_client = accept(server_fd, (struct sockaddr *)&direccion,(socklen_t*)&addrlen);
     jugadores[0]= socket_client;
     if (socket_client == -1) 
@@ -162,7 +161,7 @@ int main(int argc, char const *argv[])
 
     while(true)
     {
-        string s = to_string(p1);
+        string s = to_string(p1y);
         char mensaje[2];
         strcpy(mensaje,s.c_str());
         write(jugadores[1], mensaje, sizeof(mensaje));
